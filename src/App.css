@@ -1,0 +1,15 @@
+#root {
+  max-width: 1280px; 
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.nav-link {
+  border-bottom: none;
+}
+
+.active-link {
+  border-bottom: 2px solid purple;
+  color: purple;
+}
