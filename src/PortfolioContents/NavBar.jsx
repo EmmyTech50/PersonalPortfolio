@@ -8,7 +8,15 @@ function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box w="100%" h="15vh" mb={10} position="relative" >
+    <Box
+      w="100%"
+      h="15vh"
+      mb={10}
+      position="sticky" // Change to sticky
+      top={0} // Stick to the top
+      zIndex={100} // Ensure it stays above other content
+      bg="white" // Optional: Set background color for better visibility
+    >
       <Flex
         justifyContent="space-between"
         alignItems="center"
@@ -18,7 +26,7 @@ function NavBar() {
       >
         {/* Links Section */}
         <Flex display={['none', 'none', 'flex']} gap={2} color="#000000">
-          {['home', 'About', 'My-works', 'contact'].map((section) => (
+          {['home', 'about', 'my-works', 'contact'].map((section) => (
             <ScrollLink
               key={section}
               to={section}
@@ -53,7 +61,13 @@ function NavBar() {
 
         {/* Social Links Section */}
         <Flex gap={2} justify="center" alignItems="center">
-          <Button variant="solid" colorScheme="purple" fontWeight="bold" size="md">
+          <Button
+            variant="solid"
+            colorScheme="purple"
+            fontWeight="bold"
+            size="md"
+            onClick={() => window.open('/path-to-your-cv-file.pdf', '_blank')} // Opens the CV file in a new tab
+          >
             Download CV
           </Button>
           {[ 

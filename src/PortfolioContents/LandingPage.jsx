@@ -112,7 +112,7 @@ function LandingPage() {
         </Flex>
       </Element>
 
-      <Element name="aboutme">
+      <Element name="about">
         <Flex
           alignItems="center"
           direction={['column', 'column', 'row']}
@@ -138,88 +138,86 @@ function LandingPage() {
         </Flex>
       </Element>
 
-      <Element name="myworks">
-  <Box
-    bg="#ffff"
-    color="white"
-    mt={30}
-    borderRadius="md"
-    mb={10}
-    justifyContent="center"
-    alignItems="center"
-    display="flex"
-    flexDirection="column"
-    overflowX="hidden" // Prevent horizontal scroll
-  >
-    <Heading fontSize={['2xl', '2xl', '3xl']} my={5} color="black">
-      My Work Gallery
-    </Heading>
-
-    <Grid 
-      templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} 
-      gap={6} 
-      width="100%" 
-      justifyContent="center" 
-      alignItems="center"
-    >
-      {projects.map((project, index) => (
+      <Element name="my-works">
         <Box
-          key={index}
-          mx="auto"
-          bg="purple.500"
-          borderRadius="10px"
+          bg="#ffff"
           color="white"
-          p={5}
-          display="flex"
-          flexDirection="column"
+          mt={30}
+          borderRadius="md"
+          mb={10}
           justifyContent="center"
           alignItems="center"
-          textAlign="center"
+          display="flex"
+          flexDirection="column"
+          overflowX="hidden" // Prevent horizontal scroll
         >
-          {/* Project Image */}
-          <Box
-            width="100%"
-            height="200px"
-            overflow="hidden"
-            borderRadius="10px"
-            mb={4}
+          <Heading fontSize={['2xl', '2xl', '3xl']} my={5} color="black">
+            My Work Gallery
+          </Heading>
+
+          <Grid 
+            templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} 
+            gap={6} 
+            width="100%" 
+            justifyContent="center" 
+            alignItems="center"
           >
-            <img
-              src={project.imgSrc}
-              alt={project.title}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-            />
-          </Box>
+            {projects.map((project, index) => (
+              <Box
+                key={index}
+                mx="auto"
+                bg="purple.500"
+                borderRadius="10px"
+                color="white"
+                p={5}
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+                textAlign="center"
+              >
+                {/* Project Image */}
+                <Box
+                  width="100%"
+                  height="200px"
+                  overflow="hidden"
+                  borderRadius="10px"
+                  mb={4}
+                >
+                  <img
+                    src={project.imgSrc}
+                    alt={project.title}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </Box>
 
-          {/* Project Details */}
-          <Box>
-            <Heading fontSize={['md', 'lg', 'xl']} mb={2}>
-              {project.title}
-            </Heading>
-            <Text mb={4} fontWeight="bold" fontSize={['sm', 'md', 'lg']}>
-              {project.description}
-            </Text>
-            <Button
-              colorScheme="whiteAlpha"
-              mt={2}
-              onClick={() => window.open(project.link, "_blank")}
-            >
-              {project.buttonText}
-            </Button>
-          </Box>
+                {/* Project Details */}
+                <Box>
+                  <Heading fontSize={['md', 'lg', 'xl']} mb={2}>
+                    {project.title}
+                  </Heading>
+                  <Text mb={4} fontWeight="bold" fontSize={['sm', 'md', 'lg']}>
+                    {project.description}
+                  </Text>
+                  <Button
+                    colorScheme="whiteAlpha"
+                    mt={2}
+                    onClick={() => window.open(project.link, "_blank")}
+                  >
+                    {project.buttonText}
+                  </Button>
+                </Box>
+              </Box>
+            ))}
+          </Grid>
         </Box>
-      ))}
-    </Grid>
-  </Box>
-</Element>
+      </Element>
 
-
-
-      <Element name="contactme">
+      <Element name="contact">
           <Heading fontSize={['2xl', '2xl', '3xl']} color="#00000">
             Contact Me
           </Heading>
@@ -276,3 +274,5 @@ function LandingPage() {
 }
 
 export default LandingPage;
+
+
