@@ -8,7 +8,7 @@ function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box w="100%" h="15vh" mb={10} position="relative">
+    <Box w="100%" h="15vh" mb={10} position="relative" >
       <Flex
         justifyContent="space-between"
         alignItems="center"
@@ -17,7 +17,7 @@ function NavBar() {
         w="100%"
       >
         {/* Links Section */}
-        <Flex display={['none', 'none', 'flex']} gap={4} color="#000000">
+        <Flex display={['none', 'none', 'flex']} gap={2} color="#000000">
           {['home', 'About', 'My-works', 'contact'].map((section) => (
             <ScrollLink
               key={section}
@@ -52,7 +52,7 @@ function NavBar() {
         />
 
         {/* Social Links Section */}
-        <Flex gap={4} justify="center" alignItems="center">
+        <Flex gap={2} justify="center" alignItems="center">
           <Button variant="solid" colorScheme="purple" fontWeight="bold" size="md">
             Download CV
           </Button>
@@ -63,7 +63,7 @@ function NavBar() {
             { icon: <FaTwitter />, link: "https://x.com/EmmyTech50" } 
           ].map(({ icon, link }, index) => (
             <Link href={link} isExternal key={index}>
-              {React.cloneElement(icon, { size: '24px', color: 'purple' })}
+              {React.cloneElement(icon, { size: '15px', color: 'purple' })}
             </Link>
           ))}
         </Flex>

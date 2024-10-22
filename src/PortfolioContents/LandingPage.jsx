@@ -9,13 +9,12 @@ import {
   FormLabel,
   Input,
   Textarea,
-  IconButton,
+  Grid,
 } from "@chakra-ui/react";
 import React, { useState } from 'react';
 import { Element } from "react-scroll";
 import NavBar from "./NavBar";
 import emailjs from '@emailjs/browser';
-import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 
 const projects = [
   {
@@ -52,21 +51,8 @@ const projects = [
   },
 ];
 
+
 function LandingPage() {
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? projects.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
-
-  const nextSlide = () => {
-    const isLastSlide = currentIndex === projects.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-  };
 
   const [formData, setFormData] = useState({
     email: "",
@@ -156,7 +142,6 @@ function LandingPage() {
   <Box
     bg="#ffff"
     color="white"
-    p={[4, 6, 8]}
     mt={30}
     borderRadius="md"
     mb={10}
@@ -170,115 +155,68 @@ function LandingPage() {
       My Work Gallery
     </Heading>
 
-    <Flex justifyContent="center" alignItems="center" position="relative">
-      {/* Previous Slide Button */}
-      <IconButton
-        bg="#ffff"
-        fontSize={['20px', '30px']}
-        color="purple"
-        aria-label="Previous"
-        icon={<ArrowBackIcon />}
-        onClick={prevSlide}
-        position="absolute"
-        left={['10px', '20px', '30px']}
-        zIndex="1"
-        _hover={{ bg: "purple.100" }}
-      />
-
-      {/* Carousel Container */}
-      <Flex
-        width="100%"
-        position="relative"
-        height={['auto', 'auto', '70vh']} // Adjusting height for small screens
-        overflow="hidden"
-      >
-        <Flex
-          transform={`translateX(-${currentIndex * 100}%)`}
-          transition="transform 0.5s ease-in-out"
-          width={`${projects.length * 100}%`}
+    <Grid 
+      templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} 
+      gap={6} 
+      width="100%" 
+      justifyContent="center" 
+      alignItems="center"
+    >
+      {projects.map((project, index) => (
+        <Box
+          key={index}
+          mx="auto"
+          bg="purple.500"
+          borderRadius="10px"
+          color="white"
+          p={5}
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          textAlign="center"
         >
-          {projects.map((project, index) => (
-            <Box
-              key={index}
-              minW={['90%', '90%', '100%']}  // Reduced width on small screens
-              mx={['auto', 'auto', '0']}    // Centered the box on small screens
-              display="flex"
-              alignItems="center"
-              bg="purple.500"
-              borderRadius="10px"
-              color="white"
+          {/* Project Image */}
+          <Box
+            width="100%"
+            height="200px"
+            overflow="hidden"
+            borderRadius="10px"
+            mb={4}
+          >
+            <img
+              src={project.imgSrc}
+              alt={project.title}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </Box>
+
+          {/* Project Details */}
+          <Box>
+            <Heading fontSize={['md', 'lg', 'xl']} mb={2}>
+              {project.title}
+            </Heading>
+            <Text mb={4} fontWeight="bold" fontSize={['sm', 'md', 'lg']}>
+              {project.description}
+            </Text>
+            <Button
+              colorScheme="whiteAlpha"
+              mt={2}
+              onClick={() => window.open(project.link, "_blank")}
             >
-              <Flex
-                direction={['column', 'column', 'row']}
-                alignItems="center"
-                w="100%"
-                h="100%"
-              >
-                {/* Project Image */}
-                <Box
-                  flex="1"
-                  height={['auto', 'auto', '100%']}  // Adjust image height on smaller screens
-                  width="100%"
-                  overflow="hidden"
-                  borderRadius="10px"
-                >
-                  <img
-                    src={project.imgSrc}
-                    alt={project.title}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                  />
-                </Box>
-
-                {/* Project Details */}
-                <Box
-                  flex="1"
-                  p={[4, 6]}
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="center"
-                  textAlign={['center', 'left']}
-                  height="100%"
-                >
-                  <Heading fontSize={['md', 'lg', '2xl']} mb={4}>
-                    {project.title}
-                  </Heading>
-                  <Text mb={4} fontWeight="bold" fontSize={['sm', 'md', 'lg']}>
-                    {project.description}
-                  </Text>
-                  <Button
-                    colorScheme="whiteAlpha"
-                    mt={2}
-                    onClick={() => window.open(project.link, "_blank")}
-                  >
-                    {project.buttonText}
-                  </Button>
-                </Box>
-              </Flex>
-            </Box>
-          ))}
-        </Flex>
-      </Flex>
-
-      {/* Next Slide Button */}
-      <IconButton
-        bg="#ffff"
-        fontSize={['20px', '30px']}
-        color="purple"
-        aria-label="Next"
-        icon={<ArrowForwardIcon />}
-        onClick={nextSlide}
-        position="absolute"
-        right={['10px', '20px', '30px']}
-        zIndex="1"
-        _hover={{ bg: "purple.100" }}
-      />
-    </Flex>
+              {project.buttonText}
+            </Button>
+          </Box>
+        </Box>
+      ))}
+    </Grid>
   </Box>
 </Element>
+
 
 
       <Element name="contactme">
