@@ -9,77 +9,92 @@ function NavBar() {
 
   return (
     <Box
+      position="fixed" 
+      top={0} 
+      left={0} 
+      right={0} 
+      zIndex={100}
       w="100%"
-      h="15vh"
+      h="10vh"
       mb={10}
-      position="sticky" // Change to sticky
-      top={0} // Stick to the top
-      zIndex={100} // Ensure it stays above other content
-      bg="white" // Optional: Set background color for better visibility
+      bgColor="black" // The body background remains black
     >
       <Flex
-        justifyContent="space-between"
+        justifyContent="center"
         alignItems="center"
-        paddingInline={['20px', '30px', '50px']}
         h="100%"
         w="100%"
+        bgColor="black" // This will allow the black to extend fully across the screen
       >
-        {/* Links Section */}
-        <Flex display={['none', 'none', 'flex']} gap={2} color="#000000">
-          {['home', 'about', 'my-works', 'contact'].map((section) => (
-            <ScrollLink
-              key={section}
-              to={section}
-              smooth={true}
-              duration={500}
-              spy={true}
-              activeClass="active-link"
-              className="nav-link"
-            >
-              <Box
-                as="span"
-                fontWeight="bold"
-                size="lg"
-                cursor="pointer"
-                _hover={{ color: 'purple.500' }}
-                _activeLink={{ color: 'purple.500' }} // Active state color
+        <Flex
+          justifyContent="space-between"
+          alignItems="center"
+          w={['90%', '85%', '94%']} // Set a limited width for the grey header
+          paddingInline={['20px', '30px', '50px']}
+          h="100%"
+          bgColor="grey" // Header (links and button) background is grey and contained within limited width
+          borderRadius="md" // Optional: Add a slight border radius for aesthetics
+        >
+          {/* Links Section */}
+          <Flex display={['none', 'none', 'flex']} gap={2} color="#000000">
+            {['home', 'about', 'my-works', 'contact'].map((section) => (
+              <ScrollLink
+                key={section}
+                to={section}
+                smooth={true}
+                duration={500}
+                spy={true}
+                activeClass="active-link"
+                className="nav-link"
               >
-                {section.charAt(0).toUpperCase() + section.slice(1).replace(/([A-Z])/g, ' $1')}
-              </Box>
-            </ScrollLink>
-          ))}
-        </Flex>
+                <Box
+                  mx={2}
+                  as="span"
+                  fontWeight="bold"
+                  size="lg"
+                  cursor="pointer"
+                  _hover={{ color: "#ffff" }}
+                  _activeLink={{ color: 'purple.500' }} // Active state color
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1).replace(/([A-Z])/g, ' $1')}
+                </Box>
+              </ScrollLink>
+            ))}
+          </Flex>
 
-        {/* Hamburger Icon for small screens */}
-        <IconButton
-          bgColor='#ffff'
-          aria-label="Open Menu"
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-          display={['flex', 'flex', 'none']}
-          onClick={isOpen ? onClose : onOpen}
-        />
+          {/* Hamburger Icon for small screens */}
+          <IconButton
+            bgColor="grey"
+            aria-label="Open Menu"
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            display={['flex', 'flex', 'none']}
+            onClick={isOpen ? onClose : onOpen}
+          />
 
-        {/* Social Links Section */}
-        <Flex gap={2} justify="center" alignItems="center">
-          <Button
-            variant="solid"
-            colorScheme="purple"
-            fontWeight="bold"
-            size="md"
-            onClick={() => window.open('/path-to-your-cv-file.pdf', '_blank')} // Opens the CV file in a new tab
-          >
-            Download CV
-          </Button>
-          {[ 
-            { icon: <FaGithub />, link: "https://github.com/EmmyTech50" }, 
-            { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/emmanuel-onogwu-650092239/" }, 
-            { icon: <FaFacebook />, link: "https://web.facebook.com/profile.php?id=61562327864984" }, 
-            { icon: <FaTwitter />, link: "https://x.com/EmmyTech50" } 
-          ].map(({ icon, link }, index) => (
-            <Link href={link} isExternal key={index}>
-              {React.cloneElement(icon, { size: '15px', color: 'purple' })}
-            </Link>
-          ))}
+          {/* Social Links Section */}
+          <Flex gap={2} justify="center" alignItems="center">
+            <Button
+              _hover={{ color: "#ffff" }}
+              variant="solid"
+              color="#000000"
+              bgColor="blue"
+              fontWeight="bold"
+              size="md"
+              onClick={() => window.open('/path-to-your-cv-file.pdf', '_blank')}
+            >
+              Download CV
+            </Button>
+            {[
+              { icon: <FaGithub />, link: "https://github.com/EmmyTech50" },
+              { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/emmanuel-onogwu-650092239/" },
+              { icon: <FaFacebook />, link: "https://web.facebook.com/profile.php?id=61562327864984" },
+              { icon: <FaTwitter />, link: "https://x.com/EmmyTech50" }
+            ].map(({ icon, link }, index) => (
+              <Link href={link} isExternal key={index}>
+                {React.cloneElement(icon, { size: '15px', color: 'black' })}
+              </Link>
+            ))}
+          </Flex>
         </Flex>
       </Flex>
 
@@ -90,17 +105,17 @@ function NavBar() {
           pos="absolute"
           top="15vh"
           left="0"
-          w="100%"
-          bg="white"
+          w="50%"
+          color="#ffff"
+          bg="black"  // Mobile menu background can remain black
           zIndex={10}
           spacing={6}
           p={4}
           display={['flex', 'flex', 'none']}
         >
-          {['home', 'aboutme', 'myworks', 'contact'].map((section) => (
+          {['home', 'about', 'my-works', 'contact'].map((section) => (
             <ScrollLink
               key={section}
-              fontWeight="bold"
               to={section}
               smooth={true}
               duration={500}
