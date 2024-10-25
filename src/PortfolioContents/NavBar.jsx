@@ -9,11 +9,6 @@ function NavBar() {
 
   return (
     <Box
-      position="fixed" 
-      top={0} 
-      left={0} 
-      right={0} 
-      zIndex={100}
       w="100%"
       h="10vh"
       mb={10}

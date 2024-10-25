@@ -3,10 +3,14 @@ import React, { useState } from 'react';
 import { Element } from "react-scroll";
 import NavBar from "./NavBar";
 import emailjs from '@emailjs/browser';
+import myonCar from '../assets/myonCar.jpeg';
+import myonblue from '../assets/myonblue.jpeg';
+import schoolsite from '../assets/schoolsite.png';
+
 
 const projects = [
   {
-    imgSrc: "src/schoolsite.png",
+    imgSrc: schoolsite,
     title: "Sylvester School",
     description:
       "This website serves as the central hub for students, parents, and faculty at Sylvester High School. Access important school information, curriculum details, announcements, and online learning resources all in one place.",
@@ -14,7 +18,7 @@ const projects = [
     buttonText: "View Project",
   },
   {
-    imgSrc: "src/schoolsite.png",
+    imgSrc: schoolsite,
     title: "Sylvester School",
     description:
       "This website serves as the central hub for students, parents, and faculty at Sylvester High School. Access important school information, curriculum details, announcements, and online learning resources all in one place.",
@@ -22,7 +26,7 @@ const projects = [
     buttonText: "View Project",
   },
   {
-    imgSrc: "src/schoolsite.png",
+    imgSrc: schoolsite,
     title: "Sylvester School",
     description:
       "This website serves as the central hub for students, parents, and faculty at Sylvester High School. Access important school information, curriculum details, announcements, and online learning resources all in one place.",
@@ -30,7 +34,7 @@ const projects = [
     buttonText: "View Project",
   },
   {
-    imgSrc: "src/schoolsite.png",
+    imgSrc: schoolsite,
     title: "Sylvester School",
     description:
       "This is another project focused on enhancing the online presence and learning experience for students and staff at Sylvester High School.",
@@ -107,7 +111,7 @@ function LandingPage() {
           </Box>
 
           <Box mt={[6, 6, 0]} ml={6}>
-            <Image borderRadius="full" boxSize={['200px', '200px', '400px']} src="src/myonCar.jpeg" alt="Profile Image" />
+            <Image borderRadius="full" boxSize={['200px', '200px', '400px']} src={myonCar} alt="Profile Image" />
           </Box>
         </Flex>
       </Element>
@@ -142,7 +146,7 @@ function LandingPage() {
           </Box>
 
           <Box mt={[6, 6, 0]} ml={6}>
-            <Image borderRadius="full" boxSize={['200px', '200px', '400px']} src="src/myonblue.jpeg" alt="Profile Image" />
+            <Image borderRadius="full" boxSize={['200px', '200px', '400px']} src={myonblue} alt="Profile Image" />
           </Box>
         </Flex>
       </Element>
@@ -199,7 +203,7 @@ function LandingPage() {
                   mb={3}
                 >
                   <img
-                    src={project.imgSrc}
+                    src={schoolsite}
                     alt={project.title}
                     style={{
                       width: "100%",
@@ -264,7 +268,7 @@ function LandingPage() {
                   mb={4}
                 >
                   <img
-                    src={project.imgSrc}
+                    src={schoolsite}
                     alt={project.title}
                     style={{
                       width: "100%",
