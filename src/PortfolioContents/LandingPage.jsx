@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Box, 
   Flex, 
@@ -19,15 +19,35 @@ import {
 } from '@chakra-ui/react';
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import myonCar from '../assets/myonCar.jpeg';
 
 const MotionBox = motion(Box);
 
 const projects = [
-  { title: 'Sylvester High School', description: 'A Hub for every single activity.' },
-  { title: 'MSN Church', description: 'A site for Mission outreach.' },
-  { title: 'Neco Portal', description: 'Result-Checking and other services.' },
-  { title: 'BlockWare', description: 'An Organization that renders job opportunities.' },
+  { 
+    title: 'Sylvester High School', 
+    description: 'A site that serves as a Hub for every single activity of the school.', 
+    url: "https://sylvesterschool.vercel.app", 
+  },
+
+  { 
+    title: 'MSN Church', 
+    description: 'A site that serves as a home for Missionary outreach and gospel exploration  .', 
+    url: "https://sylvesterschool.vercel.app",  
+  },
+
+  { 
+    title: 'Neco Portal', 
+    description: 'A site that serves as a portal for checking NECO result and other services.', 
+    url: "https://sylvesterschool.vercel.app",  
+  },
+
+  { 
+    title: 'BlockWare', 
+    description: 'A site for an organization that creates and renders job opportunities.', 
+    url: "https://sylvesterschool.vercel.app", 
+  },
 ];
 
 const swingInVariants = {
@@ -41,6 +61,39 @@ const swingInVariants = {
 };
 
 const LandingPage = () => {
+
+  const [formData, setFormData] = React.useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value, // Dynamically update the specific field
+    }));
+  };
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    const serviceID = "service_tea318k";
+    const templateID = "template_dnr27fv";
+    const publicKey = "9m7Kbm9CSJHDtsygZ";
+
+    emailjs.send(serviceID, templateID, formData, publicKey)
+      .then((response) => {
+        console.log("SUCCESS!", response.status, response.text);
+        alert("Message sent successfully!");
+      })
+      .catch((err) => {
+        console.log("FAILED...", err);
+        alert("Failed to send message. Please try again.");
+      });
+  };
+
   return (
     <Box
       bg="linear-gradient(to right, #8360c3, #2ebf91)"
@@ -86,8 +139,8 @@ const LandingPage = () => {
           >
             <Button
               as={Link}
-              href="/CV/ONOGWU EMMANUEL (2).docx" // Path to your CV file
-              download="ONOGWU EMMANUEL (2).docx"
+              href="/CV/ONOGWU EMMANUEL CV.docx" // Path to your CV file
+              download="ONOGWU EMMANUEL CV.docx"
               colorScheme="teal"
               variant="solid"
               size="lg"
@@ -135,7 +188,7 @@ const LandingPage = () => {
             src={myonCar} // Replace with your professional image
             alt="Profile Image"
             borderRadius="full"
-            boxSize={['400px', '450px', '500px']}
+            boxSize={['200px', '300px', '400px']}
           />
         </MotionBox>
       </Flex>
@@ -159,7 +212,7 @@ const LandingPage = () => {
             boxShadow="md"
             borderRadius="md"
             p={4}
-            minW={['250px', '300px', '300px']} // Minimum width for smaller screens
+            width="300px" // Fixed width for all screens
             transition={{ duration: 1 }}
             whileHover={{ scale: 1.05 }}
             flexShrink={0} // Prevents card shrinking on smaller screens
@@ -171,10 +224,13 @@ const LandingPage = () => {
                   <Heading size="md">{project.title}</Heading>
                   <Text>{project.description}</Text>
                   <Button
+                    as={Link}
+                    href={project.url} // Dynamically set the URL
                     colorScheme="teal"
                     variant="solid"
                     size="sm"
                     width="full"
+                    isExternal // Ensures the link opens in a new tab
                   >
                     View
                   </Button>
@@ -184,6 +240,7 @@ const LandingPage = () => {
           </MotionBox>
         ))}
       </Flex>
+
      
 
       {/* Contact Section */}
@@ -215,21 +272,48 @@ const LandingPage = () => {
 
           {/* Contact Form */}
           <VStack spacing={4} flex="1">
-            <FormControl isRequired>
-              <FormLabel>Name</FormLabel>
-              <Input placeholder="Your Name" bg="white" color="black" />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Email</FormLabel>
-              <Input type="email" placeholder="Your Email" bg="white" color="black" />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Message</FormLabel>
-              <Textarea placeholder="Your Message" bg="white" color="black" />
-            </FormControl>
-            <Button colorScheme="blue" width="full" _hover={{ bg: 'blue.400' }}>
-              Submit
-            </Button>
+            <form onSubmit={sendEmail}>
+              <FormControl isRequired>
+                <FormLabel>Name</FormLabel>
+                <Input
+                  name="name"
+                  placeholder="Your Name"
+                  bg="white"
+                  color="black"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="Your Email"
+                  bg="white"
+                  color="black"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Message</FormLabel>
+                <Textarea
+                  name="message"
+                  placeholder="Your Message"
+                  bg="white"
+                  color="black"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                />
+              </FormControl>
+              <Button type="submit" colorScheme="blue" width="full" _hover={{ bg: 'blue.400' }} mt={5}>
+                Submit
+              </Button>
+            </form>
           </VStack>
         </Flex>
       </Box>
