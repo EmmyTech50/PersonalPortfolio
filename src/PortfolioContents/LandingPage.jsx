@@ -34,19 +34,19 @@ const projects = [
   { 
     title: 'MSN Church', 
     description: 'A site that serves as a home for Missionary outreach and gospel exploration  .', 
-    url: "https://sylvesterschool.vercel.app",  
+    url: "https://msn.vercel.app/",  
   },
 
   { 
     title: 'Neco Portal', 
     description: 'A site that serves as a portal for checking NECO result and other services.', 
-    url: "https://sylvesterschool.vercel.app",  
+    url: "https://necoresultchecker.vercel.app/#/app/home",  
   },
 
   { 
     title: 'BlockWare', 
     description: 'A site for an organization that creates and renders job opportunities.', 
-    url: "https://sylvesterschool.vercel.app", 
+    url: "#", 
   },
 ];
 
